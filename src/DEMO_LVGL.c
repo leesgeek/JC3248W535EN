@@ -1,14 +1,16 @@
 
-// #include <Arduino.h>
+#include "lv_conf.h"
 #include <lvgl.h>
 #include "display.h"
 #include "esp_bsp.h"
 #include "lv_port.h"
-#include <esp_log.h>   // Add this line to include the header file that declares ESP_LOGI
-#include <esp_flash.h> // Add this line to include the header file that declares esp_flash_t
+#include <esp_log.h>
+#include <esp_flash.h>
 #include <esp_chip_info.h>
 #include <esp_system.h>
 #include <esp_heap_caps.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 static const char *TAG = "DEMO_LVGL";
 
@@ -35,17 +37,6 @@ static const char *TAG = "DEMO_LVGL";
 #include <demos/lv_demos.h>
 // #include <examples/lv_examples.h>
 
-void setup();
-
-#if !CONFIG_AUTOSTART_ARDUINO
-void app_main()
-{
-  // initialize arduino library before we start the tasks
-  // initArduino();
-
-  setup();
-}
-#endif
 void setup()
 {
   //  String title = "LVGL porting example";
@@ -127,4 +118,16 @@ void loop()
 {
   ESP_LOGI(TAG, "IDLE loop");
   // delay(1000);
+}
+
+/* Application entry point required by ESP-IDF. Call the setup routine and
+   keep the main task alive. LVGL runs in its own tasks/timers. */
+void app_main(void)
+{
+  setup();
+
+  for (;;)
+  {
+    vTaskDelay(pdMS_TO_TICKS(1000));
+  }
 }
