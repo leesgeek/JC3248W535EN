@@ -35,7 +35,8 @@ static const char *TAG = "DEMO_LVGL";
  * You also need to copy `lvgl/examples` to `lvgl/src/examples`. Similarly for the demos `lvgl/demos` to `lvgl/src/demos`.
  */
 #include <demos/lv_demos.h>
-// #include <examples/lv_examples.h>
+#include <examples/lv_examples.h>
+//#include "display_color_test.h"
 
 void setup()
 {
@@ -100,10 +101,10 @@ void setup()
   //  lv_example_btn_1();
 
   /**
-   * Or try out a demo.
-   * Don't forget to uncomment header and enable the demos in `lv_conf.h`. E.g. `LV_USE_DEMOS_WIDGETS`
+   * Display color ordering test: create three stacked color rectangles.
+   * This helps verifying PSRAM / display color ordering.
    */
-  lv_demo_widgets();
+  //display_color_test_create();
   //     lv_demo_benchmark();
   // lv_demo_music();
   // lv_demo_stress();
