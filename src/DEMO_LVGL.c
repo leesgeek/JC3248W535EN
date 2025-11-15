@@ -104,6 +104,7 @@ void setup()
    * Display color ordering test: create three stacked color rectangles.
    * This helps verifying PSRAM / display color ordering.
    */
+  lv_demo_widgets();
   //display_color_test_create();
   //     lv_demo_benchmark();
   // lv_demo_music();
